@@ -88,9 +88,22 @@ GEM
     debug (1.9.1)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    diff-lcs (1.5.1)
+    erb2haml (0.1.5)
+      html2haml
     erubi (1.12.0)
+    erubis (2.7.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    haml (6.3.0)
+      temple (>= 0.8.2)
+      thor
+      tilt
+    html2haml (2.3.0)
+      erubis (~> 2.7.0)
+      haml (>= 4.0)
+      nokogiri (>= 1.6.0)
+      ruby_parser (~> 3.5)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
@@ -130,7 +143,7 @@ GEM
     nio4r (2.7.0)
     nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
-    pg (1.5.4)
+    pg (1.5.5)
     psych (5.1.2)
       stringio
     public_suffix (5.0.4)
@@ -154,6 +167,10 @@ GEM
       activesupport (= 7.0.8)
       bundler (>= 1.15.0)
       railties (= 7.0.8)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
@@ -176,12 +193,33 @@ GEM
     reline (0.4.2)
       io-console (~> 0.5)
     rexml (3.2.6)
+    rspec-core (3.13.0)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-rails (6.1.1)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      railties (>= 6.1)
+      rspec-core (~> 3.12)
+      rspec-expectations (~> 3.12)
+      rspec-mocks (~> 3.12)
+      rspec-support (~> 3.12)
+    rspec-support (3.13.0)
+    ruby_parser (3.21.0)
+      racc (~> 1.5)
+      sexp_processor (~> 4.16)
     rubyzip (2.3.2)
     selenium-webdriver (4.17.0)
       base64 (~> 0.2)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sexp_processor (4.17.1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -192,7 +230,9 @@ GEM
     stimulus-rails (1.3.3)
       railties (>= 6.0.0)
     stringio (3.1.0)
+    temple (0.10.3)
     thor (1.3.0)
+    tilt (2.3.0)
     timeout (0.4.1)
     turbo-rails (2.0.2)
       actionpack (>= 6.0.0)
@@ -220,12 +260,16 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  erb2haml
+  haml
   importmap-rails
   jbuilder
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.8)
+  rails-controller-testing
   redis (~> 4.0)
+  rspec-rails (>= 3.9.0)
   selenium-webdriver
   sprockets-rails
   stimulus-rails

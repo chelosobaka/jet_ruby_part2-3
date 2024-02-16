@@ -1,0 +1,44 @@
+= form_with(model: order) do |form|
+  - if order.errors.any?
+    %div{:style => "color: red"}
+      %h2
+        = pluralize(order.errors.count, "error")
+        prohibited this order from being saved:
+      %ul
+        - order.errors.each do |error|
+          %li= error.full_message
+  %div
+    = form.label :first_name, style: "display: block"
+    = form.text_field :first_name
+  %div
+    = form.label :second_name, style: "display: block"
+    = form.text_field :second_name
+  %div
+    = form.label :patronymic, style: "display: block"
+    = form.text_field :patronymic
+  %div
+    = form.label :phone_number, style: "display: block"
+    = form.text_field :phone_number
+  %div
+    = form.label :email, style: "display: block"
+    = form.text_field :email
+  %div
+    = form.label 'weight (kg)', style: "display: block"
+    = form.text_field :weight
+  %div
+    = form.label 'length (cm)', style: "display: block"
+    = form.text_field :length
+  %div
+    = form.label 'width (cm)', style: "display: block"
+    = form.text_field :width
+  %div
+    = form.label 'height (cm)', style: "display: block"
+    = form.text_field :height
+  %div
+    = form.label :origins, style: "display: block"
+    = form.text_area :origins
+  %div
+    = form.label :destinations, style: "display: block"
+    = form.text_area :destinations
+  %div
+    = form.submit

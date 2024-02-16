@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  weight: 9.99
+  length: 9.99
+  width: 9.99
+  height: 9.99
+  origins: MyText
+  destinations: MyText
+  distance: 1
+  price: 
+  user: one
+
+two:
+  weight: 9.99
+  length: 9.99
+  width: 9.99
+  height: 9.99
+  origins: MyText
+  destinations: MyText
+  distance: 1
+  price: 
+  user: two
