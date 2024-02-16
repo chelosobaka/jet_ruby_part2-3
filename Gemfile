@@ -30,5 +30,7 @@ group :test do
   gem 'selenium-webdriver'
 end
 
+gem 'activeadmin'
 gem 'erb2haml'
 gem 'haml'
+gem 'sassc'

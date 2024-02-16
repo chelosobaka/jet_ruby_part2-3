@@ -12,6 +12,11 @@ class Order < ApplicationRecord
 
   after_validation :calc_order
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[id first_name second_name patronymic phone_number email weight width length height
+       origins destinations distance price created_at updated_at]
+  end
+
   private
 
   def process_origins
