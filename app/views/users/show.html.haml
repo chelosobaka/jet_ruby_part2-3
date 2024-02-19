@@ -1,0 +1,23 @@
+%p{:style => "color: green"}= notice
+%p
+  - if @user.avatar?
+    = image_tag @user.avatar.url, alt: 'Avatar', style: "width: 200px;"
+%p
+  %strong First name:
+  = @user.first_name
+%p
+  %strong Second name:
+  = @user.second_name
+%p
+  %strong Patronymic:
+  = @user.patronymic
+%p
+  %strong Phone number:
+  = @user.phone_number
+%p
+  %strong Email:
+  = @user.email
+%div
+  = link_to "Edit this user", edit_user_registration_path
+
+  \#{button_to "Destroy this user", @user, method: :delete}

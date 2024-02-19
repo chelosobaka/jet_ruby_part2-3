@@ -1,4 +1,4 @@
-= form_with(model: order) do |form|
+= form_with(model: [@user, @order]) do |form|
   - if order.errors.any?
     %div{:style => "color: red"}
       %h2
@@ -7,21 +7,6 @@
       %ul
         - order.errors.each do |error|
           %li= error.full_message
-  %div
-    = form.label :first_name, style: "display: block"
-    = form.text_field :first_name
-  %div
-    = form.label :second_name, style: "display: block"
-    = form.text_field :second_name
-  %div
-    = form.label :patronymic, style: "display: block"
-    = form.text_field :patronymic
-  %div
-    = form.label :phone_number, style: "display: block"
-    = form.text_field :phone_number
-  %div
-    = form.label :email, style: "display: block"
-    = form.text_field :email
   %div
     = form.label 'weight (kg)', style: "display: block"
     = form.text_field :weight

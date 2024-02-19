@@ -1,0 +1,53 @@
+= form_tag user_orders_path, method: :get do
+  = label_tag 'Filter'
+  = select_tag :order_attr, options_for_select(@order_attr_list)
+  = select_tag :order_type, options_for_select(@order_type_list)
+  = submit_tag 'Filter'
+%table
+  %thead
+    %tr
+      %th
+        id
+      %th
+        Weight (kg)
+      %th
+        Length (cm)
+      %th
+        Width (cm)
+      %th
+        Height (cm)
+      %th
+        Origins
+      %th
+        Destinations
+      %th
+        Distance (m)
+      %th
+        Price (₽)
+      %th
+        status
+      %tbody
+        - @orders.each do |order|
+          %tr
+            %td
+              = link_to order.id, user_order_path(user_id: order.user.id, id: order.id)
+            %td
+              = order.weight
+            %td
+              = order.length
+            %td
+              = order.width
+            %td
+              = order.height
+            %td
+              = order.origins
+            %td
+              = order.destinations
+            %td
+              = order.distance
+            %td
+              = order.price
+            %td
+              = order.status
+
+= paginate @orders

@@ -20,6 +20,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'letter_opener'
   gem 'web-console'
 end
 
@@ -30,7 +31,16 @@ group :test do
   gem 'selenium-webdriver'
 end
 
+gem 'aasm'
 gem 'activeadmin'
+gem 'carrierwave', '~> 3.0'
+gem 'devise'
+gem 'draper'
 gem 'erb2haml'
 gem 'haml'
+gem 'kaminari'
+gem 'pundit'
+gem 'redis-rails'
+gem 'redis-store'
 gem 'sassc'
+gem 'sidekiq'

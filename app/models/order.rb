@@ -2,22 +2,39 @@ require 'json'
 require 'net/http'
 
 class Order < ApplicationRecord
-  before_validation :process_origins, :process_destinations
+  include AASM
 
-  validates_presence_of :weight, :length, :width, :height, :origins, :destinations
-  validates_presence_of :first_name, :second_name, :patronymic, :phone_number, :email
+  belongs_to :user
+
+  before_validation :process_origins, :process_destinations, on: :create
+
+  validates_presence_of :user, :weight, :length, :width, :height, :origins, :destinations
   validates :weight, :length, :width, :height, comparison: { greater_than: 0 }
-  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
-  validates :phone_number, numericality: true, length: { minimum: 10, maximum: 15 }
 
-  after_validation :calc_order
+  after_validation :calc_order, on: :create
+  after_create do
+    text = "The order ID = #{id} has been created and is awaiting processing."
+    send_message(text)
+  end
 
-  def self.ransackable_attributes(auth_object = nil)
-    %w[id first_name second_name patronymic phone_number email weight width length height
-       origins destinations distance price created_at updated_at]
+  aasm column: 'status' do
+    state :processing, initial: true
+    state :completing
+
+    event :complete do
+      after do
+        text = "Your order ID = #{id} has been processed."
+        send_message(text)
+      end
+      transitions from: :processing, to: :completing
+    end
   end
 
   private
+
+  def send_message(message_text)
+    OrderMailer.with(order_id: id, message: message_text).order_info.deliver_later
+  end
 
   def process_origins
     self.origins = if coordinates?(origins)
