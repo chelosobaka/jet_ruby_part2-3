@@ -2,6 +2,17 @@ require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   subject(:order) { described_class.new }
+  let(:user) do
+    User.create(
+      first_name: 'Test',
+      second_name: 'Test',
+      patronymic: 'Test',
+      phone_number: '1234567890',
+      email: 'test@mail.ru',
+      password: '123456',
+      password_confirmation: '123456'
+    )
+  end
 
   %w[origins destinations].each do |point|
     describe "##{point}=" do
@@ -124,9 +135,23 @@ RSpec.describe Order, type: :model do
   end
 
   it 'must create order' do
-    order = described_class.new(first_name: 'test', second_name: 'text', patronymic: 'test', weight: 0.11,
-                                email: 'test@mail.ru', phone_number: '81232323132',
-                                length: 0.22, width: 0.33, height: 0.44, origins: 'moscow, russia', destinations: 'france, paris')
+    order = described_class.new(user_id: user.id, weight: 0.11, length: 0.22, width: 0.33, height: 0.44,
+                                origins: 'moscow, russia', destinations: 'france, paris')
     expect { order.save }.to change(described_class, :count).by(1)
+  end
+
+  describe 'aasm' do
+    let(:order) do
+      described_class.create(user_id: user.id, weight: 0.11, length: 0.22, width: 0.33, height: 0.44,
+                             origins: 'moscow, russia', destinations: 'france, paris')
+    end
+
+    it 'initial state should be processing' do
+      expect(order).to have_state(:processing)
+    end
+
+    it 'transitions from processing to completing on complete event' do
+      expect(order).to transition_from(:processing).to(:completing).on_event(:complete)
+    end
   end
 end
